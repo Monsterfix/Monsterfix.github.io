@@ -696,5 +696,5 @@
       return this;
     }
   }
-  customElements.define("com-kks-d3forcebubble", FBUBBLE);
+  customElements.define("com-gmail-cse-ari007-d3forcebubble", FBUBBLE);
 })();

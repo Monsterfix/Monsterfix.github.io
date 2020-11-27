@@ -139,7 +139,7 @@
       var container = chartRoot.appendChild(document.createElement("div"));
       container.setAttribute("id", "chartContainer");
       container.setAttribute("class", "chartContainer");
-      let dagreContainer = chartDagreRoot.appendChild(document.createElement("svg"));
+      let dagreContainer = chartDagreRoot.appendChild(document.createElement("div"));
       dagreContainer.setAttribute("id", "dagreChart");
       dagreContainer.setAttribute("width", "500px");
       dagreContainer.setAttribute("height", "500px");

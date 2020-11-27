@@ -130,9 +130,12 @@
       else this._props.selectedLabel = label;
     }
     drawGraph(value, config){
-      config.valDecimal = config.valDecimal + "";
       var r = this.shadowRoot;
       var _div = r.querySelector("div");
+      
+      d3.select("#dagreChart").remove();
+      console.log("1")
+
       let dagreContainer = _div.appendChild(document.createElement("div"));
       dagreContainer.setAttribute("id", "dagreChart");
       dagreContainer.setAttribute("width", "500px");

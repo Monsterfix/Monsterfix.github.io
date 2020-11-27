@@ -35,32 +35,6 @@
           console.log(JSON.stringify(e));
         } finally {
           host.drawChart(data, props);
-          console.log("Try load of dagre charts")
-          var g = new dagreD3.graphlib.Graph().setGraph({});
-
-          g.setNode("rect", { shape: "rect" });
-          g.setNode("circle", { shape: "circle" });
-          g.setNode("ellipse", { shape: "ellipse" });
-          g.setNode("diamond", { shape: "diamond" });
-          
-         
-          var svg = d3.select(shadow.querySelector("#dagreChart"));
-
-          //var svg = d3.select("dagreChart"),
-          var inner = svg.select("g");
-          var zoom = d3.zoom().on("zoom", function() {
-                inner.attr("transform", d3.event.transform);
-              });
-          svg.call(zoom);
-          var render = new dagreD3.render();
-          console.log("Dagre Rendered 7")
-          
-          render(inner, g);
-      
-          var initialScale = 0.75;
-          svg.call(zoom.transform, d3.zoomIdentity.translate((svg.attr("width") - g.graph().width * initialScale) / 2, 20).scale(initialScale));
-          
-          svg.attr('height', g.graph().height * initialScale + 40);
       }
       };
       if (!(this._init || this._selectionEvent)) {
@@ -140,8 +114,8 @@
       table.setAttribute("border", "0");
       let tbody = table.appendChild(document.createElement("tbody"));
       let tabrow = tbody.appendChild(document.createElement("tr"));
-      let chartRoot = tabrow.appendChild(document.createElement("td"));
       let chartDagreRoot = tabrow.appendChild(document.createElement("td"));
+      let chartRoot = tabrow.appendChild(document.createElement("td"));
       let buttonRoot = tabrow.appendChild(document.createElement("td"));
       let legendRoot = tabrow.appendChild(document.createElement("td"));
       var container = chartRoot.appendChild(document.createElement("div"));
@@ -158,6 +132,36 @@
       legendRoot.setAttribute("id", "legendContainer");
       legendRoot.setAttribute("class", "legendContainerHidden");
       var fbchart = this.drawForceBubble(value, config, this.shadowRoot, this);
+
+      console.log("Try load of dagre charts")
+      var g = new dagreD3.graphlib.Graph().setGraph({});
+
+      g.setNode("rect", { shape: "rect" });
+      g.setNode("circle", { shape: "circle" });
+      g.setNode("ellipse", { shape: "ellipse" });
+      g.setNode("diamond", { shape: "diamond" });
+      
+     
+      var svg = d3.select(shadow.querySelector("#dagreChart"));
+
+      //var svg = d3.select("dagreChart"),
+      var inner = svg.select("g");
+      var zoom = d3.zoom().on("zoom", function() {
+            inner.attr("transform", d3.event.transform);
+          });
+      svg.call(zoom);
+      var render = new dagreD3.render();
+      console.log("Dagre Rendered 8")
+      
+      render(inner, g);
+  
+      var initialScale = 0.75;
+      svg.call(zoom.transform, d3.zoomIdentity.translate((svg.attr("width") - g.graph().width * initialScale) / 2, 20).scale(initialScale));
+      
+      svg.attr('height', g.graph().height * initialScale + 40);
+
+
+
     }
     loadScript(src, shadowRoot) {
       return new Promise(function (resolve, reject) {

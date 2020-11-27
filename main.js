@@ -44,9 +44,7 @@
           g.setNode("diamond", { shape: "diamond" });
           
          
-          dagreSRC.setAttribute("id", "dagreChart");
-          dagreSRC.setAttribute("height", "500px");
-          dagreSRC.setAttribute("width", "500px");
+          
 
           var svg = d3.select("dagreChart"),
           inner = svg.select("g");

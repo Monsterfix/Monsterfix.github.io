@@ -130,10 +130,11 @@
       else this._props.selectedLabel = label;
     }
     drawGraph(value, config){
-      var width = this.target.offsetWidth * 1
-      var height = this.target.offsetHeight * 1 ;
+     
       var r = this.shadowRoot;
       var _div = r.querySelector("div");
+      var width = _div.offsetWidth * 1
+      var height = _div.offsetHeight * 1 ;
       
       d3.select(r.querySelector("#dagreChart")).remove()
       console.log("3")

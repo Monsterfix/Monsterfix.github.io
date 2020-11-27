@@ -155,10 +155,43 @@
       console.log("Try load of dagre charts")
       var g = new dagreD3.graphlib.Graph().setGraph({});
 
-      g.setNode("rect", { shape: "rect" });
-      g.setNode("circle", { shape: "circle" });
-      g.setNode("ellipse", { shape: "ellipse" });
-      g.setNode("diamond", { shape: "diamond" });
+      // States and transitions from RFC 793
+      var states = [ "CLOSED", "LISTEN", "SYN RCVD", "SYN SENT",
+                    "ESTAB", "FINWAIT-1", "CLOSE WAIT", "FINWAIT-2",
+                    "CLOSING", "LAST-ACK", "TIME WAIT" ];
+
+      // Automatically label each of the nodes
+      states.forEach(function(state) { g.setNode(state, { label: state }); });
+
+      // Set up the edges
+      g.setEdge("CLOSED",     "LISTEN",     { label: "open" });
+      g.setEdge("LISTEN",     "SYN RCVD",   { label: "rcv SYN" });
+      g.setEdge("LISTEN",     "SYN SENT",   { label: "send" });
+      g.setEdge("LISTEN",     "CLOSED",     { label: "close" });
+      g.setEdge("SYN RCVD",   "FINWAIT-1",  { label: "close" });
+      g.setEdge("SYN RCVD",   "ESTAB",      { label: "rcv ACK of SYN" });
+      g.setEdge("SYN SENT",   "SYN RCVD",   { label: "rcv SYN" });
+      g.setEdge("SYN SENT",   "ESTAB",      { label: "rcv SYN, ACK" });
+      g.setEdge("SYN SENT",   "CLOSED",     { label: "close" });
+      g.setEdge("ESTAB",      "FINWAIT-1",  { label: "close" });
+      g.setEdge("ESTAB",      "CLOSE WAIT", { label: "rcv FIN" });
+      g.setEdge("FINWAIT-1",  "FINWAIT-2",  { label: "rcv ACK of FIN" });
+      g.setEdge("FINWAIT-1",  "CLOSING",    { label: "rcv FIN" });
+      g.setEdge("CLOSE WAIT", "LAST-ACK",   { label: "close" });
+      g.setEdge("FINWAIT-2",  "TIME WAIT",  { label: "rcv FIN" });
+      g.setEdge("CLOSING",    "TIME WAIT",  { label: "rcv ACK of FIN" });
+      g.setEdge("LAST-ACK",   "CLOSED",     { label: "rcv ACK of FIN" });
+      g.setEdge("TIME WAIT",  "CLOSED",     { label: "timeout=2MSL" });
+
+      // Set some general styles
+      g.nodes().forEach(function(v) {
+        var node = g.node(v);
+        node.rx = node.ry = 5;
+      });
+
+      // Add some custom colors based on state
+      g.node('CLOSED').style = "fill: #f77";
+      g.node('ESTAB').style = "fill: #7f7";
       
      
       var svg = d3.select(r.querySelector("#dagreChart"));
@@ -170,7 +203,7 @@
           });
       svg.call(zoom);
       var render = new dagreD3.render();
-      console.log("Dagre Rendered 9")
+      console.log("Dagre Rendered 10")
       
       render(inner, g);
   

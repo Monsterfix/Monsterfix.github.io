@@ -161,7 +161,7 @@
       var legend = legendRoot.appendChild(document.createElement("div"));
       legendRoot.setAttribute("id", "legendContainer");
       legendRoot.setAttribute("class", "legendContainerHidden");
-      //var fbchart = this.drawForceBubble(value, config, this.shadowRoot, this);
+      var fbchart = this.drawForceBubble(value, config, this.shadowRoot, this);
 
       console.log("Try load of dagre charts")
       var g = new dagreD3.graphlib.Graph().setGraph({});
@@ -206,7 +206,7 @@
       
      
       //var svg = d3.select(r.querySelector("#dagreChart"));
-      var svg = d3.select(r.querySelector("#chartContainer")).append("svg");
+      var svg = d3.select(r.querySelector("#dagreChart")).append("svg");
       //var svg = d3.select("dagreChart"),
       var inner = svg.select("g");
       var zoom = d3.zoom().on("zoom", function() {
@@ -214,7 +214,7 @@
           });
       svg.call(zoom);
       var render = new dagreD3.render();
-      console.log("Dagre Rendered 13")
+      console.log("Dagre Rendered 14")
       
       render(inner, g);
   

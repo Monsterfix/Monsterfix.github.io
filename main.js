@@ -196,7 +196,7 @@
       svg.attr('height', g.graph().height * initialScale + 40);
     }
     drawChart(value, config) {
-      drawGraph(value,config);
+      this.drawGraph(value,config);
       return;
       config.valDecimal = config.valDecimal + "";
       var r = this.shadowRoot;

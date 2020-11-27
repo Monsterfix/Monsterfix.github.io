@@ -133,8 +133,8 @@
       var r = this.shadowRoot;
       var _div = r.querySelector("div");
       
-      d3.select("#dagreChart").remove();
-      console.log("1")
+      console.log(d3.select(r.querySelector("#dagreChart")))
+      console.log("2")
 
       let dagreContainer = _div.appendChild(document.createElement("div"));
       dagreContainer.setAttribute("id", "dagreChart");

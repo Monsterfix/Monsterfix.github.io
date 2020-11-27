@@ -47,13 +47,13 @@
           var svg = d3.select(shadow.querySelector("#dagreChart"));
 
           //var svg = d3.select("dagreChart"),
-          inner = svg.select("g");
+          var inner = svg.select("g");
           var zoom = d3.zoom().on("zoom", function() {
                 inner.attr("transform", d3.event.transform);
               });
           svg.call(zoom);
           var render = new dagreD3.render();
-          console.log("Dagre Rendered 5")
+          console.log("Dagre Rendered 6")
           
           render(inner, g);
       

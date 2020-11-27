@@ -195,7 +195,7 @@
       
      
       //var svg = d3.select(r.querySelector("#dagreChart"));
-      var svg = d3.select("#dagreChart").append("svg");
+      var svg = d3.select(r.querySelector("#dagreChart")).append("svg");
       //var svg = d3.select("dagreChart"),
       var inner = svg.select("g");
       var zoom = d3.zoom().on("zoom", function() {

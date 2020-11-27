@@ -16,75 +16,7 @@
     onCustomWidgetBeforeUpdate(changedProperties) {}
     onCustomWidgetAfterUpdate(changedProperties) {
       var shadow = this.shadowRoot;
-      if ("startColor" in changedProperties) {
-        this._props.startColor = changedProperties["startColor"];
-        this._selectionEvent = false;
-      }
-      if ("endColor" in changedProperties) {
-        this._props.endColor = changedProperties["endColor"];
-        this._selectionEvent = false;
-      }
-      if ("title" in changedProperties) {
-        this._props.title = changedProperties["title"];
-        this._selectionEvent = false;
-      }
-      if ("showTitle" in changedProperties) {
-        this._props.showTitle = changedProperties["showTitle"];
-        this._selectionEvent = false;
-      }
-      if ("showAvg" in changedProperties) {
-        this._props.showAvg = changedProperties["showAvg"];
-        this._selectionEvent = false;
-      }
-      if ("valDecimal" in changedProperties) {
-        this._props.valDecimal = changedProperties["valDecimal"];
-        this._selectionEvent = false;
-      }
-      if ("sizeDecimal" in changedProperties) {
-        this._props.sizeDecimal = changedProperties["sizeDecimal"];
-        this._selectionEvent = false;
-      }
-      if ("colorDecimal" in changedProperties) {
-        this._props.colorDecimal = changedProperties["colorDecimal"];
-        this._selectionEvent = false;
-      }
-      if ("xAxisLabel" in changedProperties) {
-        this._props.xAxisLabel = changedProperties["xAxisLabel"];
-        this._selectionEvent = false;
-      }
-      if ("sizeLabel" in changedProperties) {
-        this._props.sizeLabel = changedProperties["sizeLabel"];
-        this._selectionEvent = false;
-      }
-      if ("colorLabel" in changedProperties) {
-        this._props.colorLabel = changedProperties["colorLabel"];
-        this._selectionEvent = false;
-      }
-      if ("selectedLabel" in changedProperties) {
-        if (changedProperties["selectedLabel"] == "") {
-          this._props.selectedLabel = undefined;
-        } else {
-          this._props.selectedLabel = changedProperties["selectedLabel"];
-        }
-        this._selectionEvent = true;
-      }
-      if ("selectedXValue" in changedProperties) {
-        this._props.selectedXValue = changedProperties["selectedXValue"];
-        this._selectionEvent = true;
-      }
-      if ("selectedSizeValue" in changedProperties) {
-        this._props.selectedSizeValue = changedProperties["selectedSizeValue"];
-        this._selectionEvent = true;
-      }
-      if ("selectedColorValue" in changedProperties) {
-        this._props.selectedColorValue =
-          changedProperties["selectedColorValue"];
-        this._selectionEvent = true;
-      }
-      if ("data" in changedProperties) {
-        this.$data = changedProperties["data"];
-        this._selectionEvent = false;
-      }
+      
       let LoadLibsAfterUpdate = async function (host, data, props) {
         try {
           await host.loadScript("https://d3js.org/d3.v4.min.js", shadow);

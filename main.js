@@ -53,14 +53,14 @@
               });
           svg.call(zoom);
           var render = new dagreD3.render();
-          console.log("Dagre Rendered 6")
+          console.log("Dagre Rendered 7")
           
           render(inner, g);
       
-          /*var initialScale = 0.75;
+          var initialScale = 0.75;
           svg.call(zoom.transform, d3.zoomIdentity.translate((svg.attr("width") - g.graph().width * initialScale) / 2, 20).scale(initialScale));
           
-          svg.attr('height', g.graph().height * initialScale + 40);*/
+          svg.attr('height', g.graph().height * initialScale + 40);
       }
       };
       if (!(this._init || this._selectionEvent)) {

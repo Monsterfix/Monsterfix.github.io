@@ -1,7 +1,7 @@
 //d3-forcebubble SAC custom widget Version 1.0.0. Copyright 2020 Arijit Das.
 (function () {
   let template = document.createElement("template");
-  template.innerHTML = `<div><svg width=100%height=100%id=d3forcebubble></svg></div>
+  template.innerHTML = `
   <style>
   .node rect {
     stroke: #333;
@@ -134,7 +134,7 @@
       var r = this.shadowRoot;
       var _div = r.querySelector("div");
       var width = _div.offsetWidth * 1
-      var height = _div.offsetHeight * 1 ;
+      var height = '1000';"_div.offsetHeight * 1 ;
       
       d3.select(r.querySelector("#dagreChart")).remove()
       console.log("3")

@@ -52,6 +52,7 @@
       this.$height = height + "px";
       let LoadLibsAfterResize = async function (host, data, props) {
         try {
+          await host.loadScript("https://dagrejs.github.io/project/dagre-d3/latest/dagre-d3.min.js", shadow);
           await host.loadScript("https://d3js.org/d3.v4.min.js", shadow);
           await host.loadScript("https://d3js.org/d3-force.v1.min.js", shadow);
           await host.loadScript("https://d3js.org/d3-scale.v1.min.js", shadow);
@@ -79,6 +80,7 @@
       this.$height = custelem.parentNode.parentNode.parentNode.style.height;
       let LoadLibs = async function (host, data, props) {
         try {
+          await host.loadScript("https://dagrejs.github.io/project/dagre-d3/latest/dagre-d3.min.js", shadow);
           await host.loadScript("https://d3js.org/d3.v4.min.js", shadow);
           await host.loadScript("https://d3js.org/d3-force.v1.min.js", shadow);
           await host.loadScript("https://d3js.org/d3-scale.v1.min.js", shadow);

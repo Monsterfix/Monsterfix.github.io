@@ -199,8 +199,8 @@
       svg.call(zoom.transform, d3.zoomIdentity.translate((svg.attr("width") - g.graph().width * initialScale) / 2, 20).scale(initialScale));
       var width = _div.offsetWidth * 1
       var height = 1000 ;
-      svg.attr('height', "100%");
-      svg.attr('width', "100%");
+      svg.attr('height', height);
+      svg.attr('width', width);
       //svg.attr('height', g.graph().height * initialScale + 40);
     }
     drawChart(value, config) {

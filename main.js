@@ -43,8 +43,7 @@
           g.setNode("ellipse", { shape: "ellipse" });
           g.setNode("diamond", { shape: "diamond" });
           
-          let _div = shadow.querySelector("div");
-          let dagreSRC = _div.appendChild(document.createElement("src"));
+         
           dagreSRC.setAttribute("id", "dagreChart");
           dagreSRC.setAttribute("height", "500px");
           dagreSRC.setAttribute("width", "500px");
@@ -149,6 +148,8 @@
       var container = chartRoot.appendChild(document.createElement("div"));
       container.setAttribute("id", "chartContainer");
       container.setAttribute("class", "chartContainer");
+      let dagreContainer = chartRoot.appendChild(document.createElement("src"));
+      dagreContainer.setAttribute("id", "dagreeChart");
       var button = buttonRoot.appendChild(document.createElement("button"));
       button.setAttribute("id", "button");
       button.setAttribute("class", "button");

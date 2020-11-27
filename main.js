@@ -141,7 +141,8 @@
       container.setAttribute("class", "chartContainer");
       let dagreContainer = chartDagreRoot.appendChild(document.createElement("svg"));
       dagreContainer.setAttribute("id", "dagreChart");
-      dagreContainer.setAttribute("class", "chartContainer");
+      dagreContainer.setAttribute("width", "500px");
+      dagreContainer.setAttribute("height", "500px");
       var button = buttonRoot.appendChild(document.createElement("button"));
       button.setAttribute("id", "button");
       button.setAttribute("class", "button");
@@ -169,7 +170,7 @@
           });
       svg.call(zoom);
       var render = new dagreD3.render();
-      console.log("Dagre Rendered 8")
+      console.log("Dagre Rendered 9")
       
       render(inner, g);
   

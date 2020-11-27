@@ -53,7 +53,7 @@
               });
           svg.call(zoom);
           var render = new dagreD3.render();
-          console.log("Dagre Rendered 3")
+          console.log("Dagre Rendered 4")
           
           render(inner, g);
       
@@ -146,7 +146,7 @@
       var container = chartRoot.appendChild(document.createElement("div"));
       container.setAttribute("id", "chartContainer");
       container.setAttribute("class", "chartContainer");
-      let dagreContainer = chartRoot.appendChild(document.createElement("src"));
+      let dagreContainer = chartRoot.appendChild(document.createElement("svg"));
       dagreContainer.setAttribute("id", "dagreeChart");
       dagreContainer.setAttribute("class", "chartContainer");
       var button = buttonRoot.appendChild(document.createElement("button"));

@@ -16,7 +16,11 @@
     onCustomWidgetBeforeUpdate(changedProperties) {}
     onCustomWidgetAfterUpdate(changedProperties) {
       var shadow = this.shadowRoot;
-      console.log("After Update")
+      
+      if ("data" in changedProperties) {
+        this.$data = changedProperties["data"];
+        this._selectionEvent = false;
+      }
       let LoadLibsAfterUpdate = async function (host, data, props) {
         try {
           await host.loadScript("https://d3js.org/d3.v4.min.js", shadow);

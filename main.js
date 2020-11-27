@@ -138,8 +138,8 @@
 
       let dagreContainer = _div.appendChild(document.createElement("div"));
       dagreContainer.setAttribute("id", "dagreChart");
-      dagreContainer.setAttribute("width", "500px");
-      dagreContainer.setAttribute("height", "500px");
+      dagreContainer.setAttribute("width", "100%");
+      dagreContainer.setAttribute("height", "100%");
 
       console.log("Try load of dagre charts")
       var g = new dagreD3.graphlib.Graph().setGraph({});

@@ -46,14 +46,14 @@
          
           
 
-          var svg = d3.select("dagreChart"),
+          var svg = d3.select("chartContainer"),
           inner = svg.select("g");
           var zoom = d3.zoom().on("zoom", function() {
                 inner.attr("transform", d3.event.transform);
               });
           svg.call(zoom);
           var render = new dagreD3.render();
-          console.log("Dagre Rendered")
+          console.log("Dagre Rendered 1")
           
           render(inner, g);
       

@@ -141,12 +141,13 @@
       let tbody = table.appendChild(document.createElement("tbody"));
       let tabrow = tbody.appendChild(document.createElement("tr"));
       let chartRoot = tabrow.appendChild(document.createElement("td"));
+      let chartDagreRoot = tabrow.appendChild(document.createElement("td"));
       let buttonRoot = tabrow.appendChild(document.createElement("td"));
       let legendRoot = tabrow.appendChild(document.createElement("td"));
       var container = chartRoot.appendChild(document.createElement("div"));
       container.setAttribute("id", "chartContainer");
       container.setAttribute("class", "chartContainer");
-      let dagreContainer = chartRoot.appendChild(document.createElement("svg"));
+      let dagreContainer = chartDagreRoot.appendChild(document.createElement("svg"));
       dagreContainer.setAttribute("id", "dagreChart");
       dagreContainer.setAttribute("class", "chartContainer");
       var button = buttonRoot.appendChild(document.createElement("button"));

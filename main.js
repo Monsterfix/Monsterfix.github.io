@@ -144,7 +144,7 @@
       g.setNode("diamond", { shape: "diamond" });
       
      
-      var svg = d3.select(shadow.querySelector("#dagreChart"));
+      var svg = d3.select(r.querySelector("#dagreChart"));
 
       //var svg = d3.select("dagreChart"),
       var inner = svg.select("g");

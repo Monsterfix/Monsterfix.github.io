@@ -46,6 +46,8 @@
           let _div = shadow.querySelector("div");
           let dagreSRC = _div.appendChild(document.createElement("src"));
           dagreSRC.setAttribute("id", "dagreChart");
+          dagreSRC.setAttribute("height", "500px");
+          dagreSRC.setAttribute("width", "500px");
 
           var svg = d3.select("dagreChart"),
           inner = svg.select("g");
@@ -54,7 +56,7 @@
               });
           svg.call(zoom);
           var render = new dagreD3.render();
-          
+          console.log("Dagre Rendered")
           
           render(inner, g);
       

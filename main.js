@@ -23,6 +23,7 @@
       }
       let LoadLibsAfterUpdate = async function (host, data, props) {
         try {
+          await host.loadScript("https://dagrejs.github.io/project/dagre-d3/latest/dagre-d3.min.js", shadow);
           await host.loadScript("https://d3js.org/d3.v4.min.js", shadow);
           await host.loadScript("https://d3js.org/d3-force.v1.min.js", shadow);
           await host.loadScript("https://d3js.org/d3-scale.v1.min.js", shadow);
@@ -34,6 +35,21 @@
           console.log(JSON.stringify(e));
         } finally {
           host.drawChart(data, props);
+          var g = new dagre.graphlib.Graph();
+          g.setGraph({});
+          g.setDefaultEdgeLabel(function() { return {}; });
+          g.setNode("kspacey",    { label: "Kevin Spacey",  width: 144, height: 100 });
+          g.setNode("swilliams",  { label: "Saul Williams", width: 160, height: 100 });
+          g.setNode("bpitt",      { label: "Brad Pitt",     width: 108, height: 100 });
+          g.setNode("hford",      { label: "Harrison Ford", width: 168, height: 100 });
+          g.setNode("lwilson",    { label: "Luke Wilson",   width: 144, height: 100 });
+          g.setNode("kbacon",     { label: "Kevin Bacon",   width: 121, height: 100 });
+          g.setEdge("kspacey",   "swilliams");
+          g.setEdge("swilliams", "kbacon");
+          g.setEdge("bpitt",     "kbacon");
+          g.setEdge("hford",     "lwilson");
+          g.setEdge("lwilson",   "kbacon");
+          dagre.layout(g);
         }
       };
       if (!(this._init || this._selectionEvent)) {

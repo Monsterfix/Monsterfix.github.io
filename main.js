@@ -129,39 +129,14 @@
       if (label == "") this._props.selectedLabel = undefined;
       else this._props.selectedLabel = label;
     }
-    drawChart(value, config) {
+    drawGraph(value, config){
       config.valDecimal = config.valDecimal + "";
       var r = this.shadowRoot;
       var _div = r.querySelector("div");
-      _div.style.width = this.$width - 10;
-      _div.style.height = this.$height;
-      _div.innerHTML = "";
-      let table = _div.appendChild(document.createElement("table"));
-      table.setAttribute("class", "rootTable");
-      table.setAttribute("cellspacing", "0");
-      table.setAttribute("cellpadding", "0");
-      table.setAttribute("border", "0");
-      let tbody = table.appendChild(document.createElement("tbody"));
-      let tabrow = tbody.appendChild(document.createElement("tr"));
-      let chartDagreRoot = tabrow.appendChild(document.createElement("td"));
-      let chartRoot = tabrow.appendChild(document.createElement("td"));
-      let buttonRoot = tabrow.appendChild(document.createElement("td"));
-      let legendRoot = tabrow.appendChild(document.createElement("td"));
-      var container = chartRoot.appendChild(document.createElement("div"));
-      container.setAttribute("id", "chartContainer");
-      container.setAttribute("class", "chartContainer");
-      let dagreContainer = chartDagreRoot.appendChild(document.createElement("div"));
+      let dagreContainer = _div.appendChild(document.createElement("div"));
       dagreContainer.setAttribute("id", "dagreChart");
       dagreContainer.setAttribute("width", "500px");
       dagreContainer.setAttribute("height", "500px");
-      var button = buttonRoot.appendChild(document.createElement("button"));
-      button.setAttribute("id", "button");
-      button.setAttribute("class", "button");
-      button.innerHTML = "«";
-      var legend = legendRoot.appendChild(document.createElement("div"));
-      legendRoot.setAttribute("id", "legendContainer");
-      legendRoot.setAttribute("class", "legendContainerHidden");
-      var fbchart = this.drawForceBubble(value, config, this.shadowRoot, this);
 
       console.log("Try load of dagre charts")
       var g = new dagreD3.graphlib.Graph().setGraph({});
@@ -203,11 +178,8 @@
       // Add some custom colors based on state
       g.node('CLOSED').style = "fill: #f77";
       g.node('ESTAB').style = "fill: #7f7";
-      
-     
-      //var svg = d3.select(r.querySelector("#dagreChart"));
+
       var svg = d3.select(r.querySelector("#dagreChart")).append("svg");
-      //var svg = d3.select("dagreChart"),
       var inner = svg.append("g");
       var zoom = d3.zoom().on("zoom", function() {
             inner.attr("transform", d3.event.transform);
@@ -222,6 +194,44 @@
       svg.call(zoom.transform, d3.zoomIdentity.translate((svg.attr("width") - g.graph().width * initialScale) / 2, 20).scale(initialScale));
       
       svg.attr('height', g.graph().height * initialScale + 40);
+    }
+    drawChart(value, config) {
+      drawGraph(value,config);
+      return;
+      config.valDecimal = config.valDecimal + "";
+      var r = this.shadowRoot;
+      var _div = r.querySelector("div");
+      _div.style.width = this.$width - 10;
+      _div.style.height = this.$height;
+      _div.innerHTML = "";
+      let table = _div.appendChild(document.createElement("table"));
+      table.setAttribute("class", "rootTable");
+      table.setAttribute("cellspacing", "0");
+      table.setAttribute("cellpadding", "0");
+      table.setAttribute("border", "0");
+      let tbody = table.appendChild(document.createElement("tbody"));
+      let tabrow = tbody.appendChild(document.createElement("tr"));
+      let chartDagreRoot = tabrow.appendChild(document.createElement("td"));
+      let chartRoot = tabrow.appendChild(document.createElement("td"));
+      let buttonRoot = tabrow.appendChild(document.createElement("td"));
+      let legendRoot = tabrow.appendChild(document.createElement("td"));
+      var container = chartRoot.appendChild(document.createElement("div"));
+      container.setAttribute("id", "chartContainer");
+      container.setAttribute("class", "chartContainer");
+      let dagreContainer = chartDagreRoot.appendChild(document.createElement("div"));
+      dagreContainer.setAttribute("id", "dagreChart");
+      dagreContainer.setAttribute("width", "500px");
+      dagreContainer.setAttribute("height", "500px");
+      var button = buttonRoot.appendChild(document.createElement("button"));
+      button.setAttribute("id", "button");
+      button.setAttribute("class", "button");
+      button.innerHTML = "«";
+      var legend = legendRoot.appendChild(document.createElement("div"));
+      legendRoot.setAttribute("id", "legendContainer");
+      legendRoot.setAttribute("class", "legendContainerHidden");
+      var fbchart = this.drawForceBubble(value, config, this.shadowRoot, this);
+
+      
 
 
 

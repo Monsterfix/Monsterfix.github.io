@@ -44,9 +44,9 @@
           g.setNode("diamond", { shape: "diamond" });
           
          
-          
+          var svg = d3.select(shadow.querySelector("#dagreChart"));
 
-          var svg = d3.select("dagreChart"),
+          //var svg = d3.select("dagreChart"),
           inner = svg.select("g");
           var zoom = d3.zoom().on("zoom", function() {
                 inner.attr("transform", d3.event.transform);

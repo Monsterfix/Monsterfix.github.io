@@ -3,15 +3,11 @@
   let template = document.createElement("template");
   template.innerHTML = `<div><svg width=100%height=100%id=d3forcebubble></svg></div>
   <style>
-  .node rect,
-  .node circle,
-  .node ellipse,
-  .node polygon {
+  .node rect {
     stroke: #333;
     fill: #fff;
-    stroke-width: 1.5px;
   }
-
+  
   .edgePath path {
     stroke: #333;
     fill: #333;

@@ -35,6 +35,7 @@
           console.log(JSON.stringify(e));
         } finally {
           host.drawChart(data, props);
+          console.log("Try load of dagre charts")
           var g = new dagre.graphlib.Graph();
           g.setGraph({});
           g.setDefaultEdgeLabel(function() { return {}; });

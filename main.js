@@ -36,22 +36,13 @@
         } finally {
           host.drawChart(data, props);
           console.log("Try load of dagre charts")
-          var g = new dagre.graphlib.Graph();
-          g.setGraph({});
-          g.setDefaultEdgeLabel(function() { return {}; });
-          g.setNode("kspacey",    { label: "Kevin Spacey",  width: 144, height: 100 });
-          g.setNode("swilliams",  { label: "Saul Williams", width: 160, height: 100 });
-          g.setNode("bpitt",      { label: "Brad Pitt",     width: 108, height: 100 });
-          g.setNode("hford",      { label: "Harrison Ford", width: 168, height: 100 });
-          g.setNode("lwilson",    { label: "Luke Wilson",   width: 144, height: 100 });
-          g.setNode("kbacon",     { label: "Kevin Bacon",   width: 121, height: 100 });
-          g.setEdge("kspacey",   "swilliams");
-          g.setEdge("swilliams", "kbacon");
-          g.setEdge("bpitt",     "kbacon");
-          g.setEdge("hford",     "lwilson");
-          g.setEdge("lwilson",   "kbacon");
-          dagre.layout(g);
-        }
+          var g = new dagreD3.graphlib.Graph().setGraph({});
+
+          g.setNode("rect", { shape: "rect" });
+          g.setNode("circle", { shape: "circle" });
+          g.setNode("ellipse", { shape: "ellipse" });
+          g.setNode("diamond", { shape: "diamond" });
+                  }
       };
       if (!(this._init || this._selectionEvent)) {
         if (this._firstUpdate) {

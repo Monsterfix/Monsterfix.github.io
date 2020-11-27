@@ -133,8 +133,7 @@
      
       var r = this.shadowRoot;
       var _div = r.querySelector("div");
-      var width = _div.offsetWidth * 1
-      var height = 1000 ;
+      
       
       d3.select(r.querySelector("#dagreChart")).remove()
       console.log("3")
@@ -198,8 +197,10 @@
   
       var initialScale = 0.75;
       svg.call(zoom.transform, d3.zoomIdentity.translate((svg.attr("width") - g.graph().width * initialScale) / 2, 20).scale(initialScale));
-      svg.attr('height', height);
-      svg.attr('width', width);
+      var width = _div.offsetWidth * 1
+      var height = 1000 ;
+      svg.attr('height', "100%");
+      svg.attr('width', "100%");
       //svg.attr('height', g.graph().height * initialScale + 40);
     }
     drawChart(value, config) {

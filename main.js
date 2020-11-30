@@ -204,6 +204,8 @@
       render(inner, g);
   
       var initialScale = 0.75;
+      console.log(svg.attr("width"))
+      console.log(g.graph().width * initialScale)
       svg.call(zoom.transform, d3.zoomIdentity.translate((svg.attr("width") - g.graph().width * initialScale) / 2, 20).scale(initialScale));
       
       svg.attr('height', height);

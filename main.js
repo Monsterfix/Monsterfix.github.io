@@ -138,7 +138,7 @@
       var custelem = shadow.host;
       this.$width = custelem.parentNode.parentNode.parentNode.style.width;
       this.$height = custelem.parentNode.parentNode.parentNode.style.height;
-      let LoadLibs = async function (host, data, props) {
+      /*let LoadLibs = async function (host, data, props) {
         try {
           console.log("LoadLibsAfterUpdate")
           await host.loadScript("https://dagrejs.github.io/project/dagre-d3/latest/dagre-d3.min.js", shadow);
@@ -156,6 +156,7 @@
         }
       };
       LoadLibs(this, this.$data, this._props);
+      */
       this._init = false;
     }
     disconnectedCallback() { console.log("disconnectedCallback") }

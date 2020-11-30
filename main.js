@@ -40,11 +40,36 @@
       this._firstResize = true;
       this._selectionEvent = false;
     }
-    onCustomWidgetBeforeUpdate(changedProperties) {console.log("onCustomWidgetBeforeUpdate")}
+    onCustomWidgetBeforeUpdate(changedProperties) {
+      console.log("onCustomWidgetBeforeUpdate");
+      let LoadLibsAfterUpdate = async function (host, data, props) {
+        console.log("LoadLibsAfterUpdate")
+        try {
+          await host.loadScript("https://dagrejs.github.io/project/dagre-d3/latest/dagre-d3.min.js", shadow);
+          await host.loadScript("https://d3js.org/d3.v4.min.js", shadow);
+          await host.loadScript("https://d3js.org/d3-force.v1.min.js", shadow);
+          await host.loadScript("https://d3js.org/d3-scale.v1.min.js", shadow);
+          await host.loadScript(
+            "https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js",
+            shadow
+          );
+        } catch (e) {
+          console.log(JSON.stringify(e));
+        } finally {
+          //host.drawGraph(data, props);
+          console.log("Load of libs done")
+        }
+      };
+      if( d3 != undefined)
+      {
+        await LoadLibsAfterUpdate(this, this.$data, this._props);
+      }
+      
+    }
     onCustomWidgetAfterUpdate(changedProperties) {
       console.log("onCustomWidgetAfterUpdate")
       var shadow = this.shadowRoot;
-      
+
       if ("data" in changedProperties) {
         this.$data = changedProperties["data"];
         this._selectionEvent = false;
@@ -82,29 +107,29 @@
       var shadow = this.shadowRoot;
       this.$width = width + "px";
       this.$height = height + "px";
-     /* let LoadLibsAfterResize = async function (host, data, props) {
-        try {
-          console.log("LoadLibsAfterUpdate")
-          await host.loadScript("https://dagrejs.github.io/project/dagre-d3/latest/dagre-d3.min.js", shadow);
-          await host.loadScript("https://d3js.org/d3.v4.min.js", shadow);
-          await host.loadScript("https://d3js.org/d3-force.v1.min.js", shadow);
-          await host.loadScript("https://d3js.org/d3-scale.v1.min.js", shadow);
-          await host.loadScript(
-            "https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js",
-            shadow
-          );
-        } catch (e) {
-          console.log(JSON.stringify(e));
-        } finally {
-          host.drawGraph(data, props);
-        }
-      };
-      if (this._firstResize) {
-        LoadLibsAfterResize(this, this.$data, this._props);
-        this._firstResize = false;
-      } else {
-        this.drawGraph(this.$data, this._props);
-      }*/
+      /* let LoadLibsAfterResize = async function (host, data, props) {
+         try {
+           console.log("LoadLibsAfterUpdate")
+           await host.loadScript("https://dagrejs.github.io/project/dagre-d3/latest/dagre-d3.min.js", shadow);
+           await host.loadScript("https://d3js.org/d3.v4.min.js", shadow);
+           await host.loadScript("https://d3js.org/d3-force.v1.min.js", shadow);
+           await host.loadScript("https://d3js.org/d3-scale.v1.min.js", shadow);
+           await host.loadScript(
+             "https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js",
+             shadow
+           );
+         } catch (e) {
+           console.log(JSON.stringify(e));
+         } finally {
+           host.drawGraph(data, props);
+         }
+       };
+       if (this._firstResize) {
+         LoadLibsAfterResize(this, this.$data, this._props);
+         this._firstResize = false;
+       } else {
+         this.drawGraph(this.$data, this._props);
+       }*/
       this.drawGraph(this.$data, this._props);
     }
     connectedCallback() {
@@ -133,19 +158,19 @@
       LoadLibs(this, this.$data, this._props);
       this._init = false;
     }
-    disconnectedCallback() {console.log("disconnectedCallback")}
+    disconnectedCallback() { console.log("disconnectedCallback") }
     updateSelectedLabel(label) {
       console.log("updateSelectedLabel");
       if (label == "") this._props.selectedLabel = undefined;
       else this._props.selectedLabel = label;
     }
-    drawGraph(value, config){
+    drawGraph(value, config) {
       console.log("drawGraph");
       var r = this.shadowRoot;
       var _div = r.querySelector("div");
       var width = _div.offsetWidth * 1
-      var height = 1000 ;
-      
+      var height = 1000;
+
       d3.select(r.querySelector("#dagreChart")).remove()
       //console.log("3")
 
@@ -158,35 +183,35 @@
       var g = new dagreD3.graphlib.Graph().setGraph({});
 
       // States and transitions from RFC 793
-      var states = [ "CLOSED", "LISTEN", "SYN RCVD", "SYN SENT",
-                    "ESTAB", "FINWAIT-1", "CLOSE WAIT", "FINWAIT-2",
-                    "CLOSING", "LAST-ACK", "TIME WAIT" ];
+      var states = ["CLOSED", "LISTEN", "SYN RCVD", "SYN SENT",
+        "ESTAB", "FINWAIT-1", "CLOSE WAIT", "FINWAIT-2",
+        "CLOSING", "LAST-ACK", "TIME WAIT"];
 
       // Automatically label each of the nodes
-      states.forEach(function(state) { g.setNode(state, { label: state }); });
+      states.forEach(function (state) { g.setNode(state, { label: state }); });
 
       // Set up the edges
-      g.setEdge("CLOSED",     "LISTEN",     { label: "open" });
-      g.setEdge("LISTEN",     "SYN RCVD",   { label: "rcv SYN" });
-      g.setEdge("LISTEN",     "SYN SENT",   { label: "send" });
-      g.setEdge("LISTEN",     "CLOSED",     { label: "close" });
-      g.setEdge("SYN RCVD",   "FINWAIT-1",  { label: "close" });
-      g.setEdge("SYN RCVD",   "ESTAB",      { label: "rcv ACK of SYN" });
-      g.setEdge("SYN SENT",   "SYN RCVD",   { label: "rcv SYN" });
-      g.setEdge("SYN SENT",   "ESTAB",      { label: "rcv SYN, ACK" });
-      g.setEdge("SYN SENT",   "CLOSED",     { label: "close" });
-      g.setEdge("ESTAB",      "FINWAIT-1",  { label: "close" });
-      g.setEdge("ESTAB",      "CLOSE WAIT", { label: "rcv FIN" });
-      g.setEdge("FINWAIT-1",  "FINWAIT-2",  { label: "rcv ACK of FIN" });
-      g.setEdge("FINWAIT-1",  "CLOSING",    { label: "rcv FIN" });
-      g.setEdge("CLOSE WAIT", "LAST-ACK",   { label: "close" });
-      g.setEdge("FINWAIT-2",  "TIME WAIT",  { label: "rcv FIN" });
-      g.setEdge("CLOSING",    "TIME WAIT",  { label: "rcv ACK of FIN" });
-      g.setEdge("LAST-ACK",   "CLOSED",     { label: "rcv ACK of FIN" });
-      g.setEdge("TIME WAIT",  "CLOSED",     { label: "timeout=2MSL" });
+      g.setEdge("CLOSED", "LISTEN", { label: "open" });
+      g.setEdge("LISTEN", "SYN RCVD", { label: "rcv SYN" });
+      g.setEdge("LISTEN", "SYN SENT", { label: "send" });
+      g.setEdge("LISTEN", "CLOSED", { label: "close" });
+      g.setEdge("SYN RCVD", "FINWAIT-1", { label: "close" });
+      g.setEdge("SYN RCVD", "ESTAB", { label: "rcv ACK of SYN" });
+      g.setEdge("SYN SENT", "SYN RCVD", { label: "rcv SYN" });
+      g.setEdge("SYN SENT", "ESTAB", { label: "rcv SYN, ACK" });
+      g.setEdge("SYN SENT", "CLOSED", { label: "close" });
+      g.setEdge("ESTAB", "FINWAIT-1", { label: "close" });
+      g.setEdge("ESTAB", "CLOSE WAIT", { label: "rcv FIN" });
+      g.setEdge("FINWAIT-1", "FINWAIT-2", { label: "rcv ACK of FIN" });
+      g.setEdge("FINWAIT-1", "CLOSING", { label: "rcv FIN" });
+      g.setEdge("CLOSE WAIT", "LAST-ACK", { label: "close" });
+      g.setEdge("FINWAIT-2", "TIME WAIT", { label: "rcv FIN" });
+      g.setEdge("CLOSING", "TIME WAIT", { label: "rcv ACK of FIN" });
+      g.setEdge("LAST-ACK", "CLOSED", { label: "rcv ACK of FIN" });
+      g.setEdge("TIME WAIT", "CLOSED", { label: "timeout=2MSL" });
 
       // Set some general styles
-      g.nodes().forEach(function(v) {
+      g.nodes().forEach(function (v) {
         var node = g.node(v);
         node.rx = node.ry = 5;
       });
@@ -197,29 +222,29 @@
 
       var svg = d3.select(r.querySelector("#dagreChart")).append("svg");
       var inner = svg.append("g");
-      var zoom = d3.zoom().on("zoom", function() {
-            inner.attr("transform", d3.event.transform);
-          });
+      var zoom = d3.zoom().on("zoom", function () {
+        inner.attr("transform", d3.event.transform);
+      });
       svg.call(zoom);
       var render = new dagreD3.render();
       //console.log("Dagre Rendered 14")
-      
+
       render(inner, g);
-  
+
       var initialScale = 0.75;
       svg.call(zoom.transform, d3.zoomIdentity.translate((width - g.graph().width * initialScale) / 2, 20).scale(initialScale));
-      
+
       svg.attr('height', height);
       svg.attr('width', width);
       //svg.attr('height', g.graph().height * initialScale + 40);
     }
-    
+
     loadScript(src, shadowRoot) {
       return new Promise(function (resolve, reject) {
         let script = document.createElement("script");
         script.src = src;
         script.onload = () => {
-         // console.log("Load: " + src);
+          // console.log("Load: " + src);
           resolve(script);
         };
         script.onerror = () =>
@@ -253,7 +278,7 @@
         data: [],
       };
     }
-   
+
   }
   customElements.define("com-gmail-cse-ari007-d3forcebubble", FBUBBLE);
 })();

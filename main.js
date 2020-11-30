@@ -63,7 +63,7 @@
         } catch (e) {
           console.log(JSON.stringify(e));
         } finally {
-          host.drawChart(data, props);
+          host.drawGraph(data, props);
       }
       };
       if (!(this._init || this._selectionEvent)) {
@@ -71,7 +71,7 @@
           LoadLibsAfterUpdate(this, this.$data, this._props);
           this._firstUpdate = false;
         } else {
-          this.drawChart(this.$data, this._props);
+          this.drawGraph(this.$data, this._props);
         }
       }
     }
@@ -94,14 +94,14 @@
         } catch (e) {
           console.log(JSON.stringify(e));
         } finally {
-          host.drawChart(data, props);
+          host.drawGraph(data, props);
         }
       };
       if (this._firstResize) {
         LoadLibsAfterResize(this, this.$data, this._props);
         this._firstResize = false;
       } else {
-        this.drawChart(this.$data, this._props);
+        this.drawGraph(this.$data, this._props);
       }
     }
     connectedCallback() {
@@ -124,7 +124,7 @@
         } catch (e) {
           console.log(JSON.stringify(e));
         } finally {
-          host.drawChart(data, props);
+          host.drawGraph(data, props);
         }
       };
       LoadLibs(this, this.$data, this._props);

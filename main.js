@@ -66,7 +66,6 @@
           console.log(JSON.stringify(e));
         } finally {
           host.drawGraph(data, props);
-          this._firstUpdate = false;
       }
       };
       if (!(this._init || this._selectionEvent)) {
@@ -78,7 +77,7 @@
         }
 
       }
-      this.drawGraph(this.$data, this._props);
+      
     }
     onCustomWidgetResize(width, height) {
       console.log("onCustomWidgetResize");
@@ -100,15 +99,15 @@
            console.log(JSON.stringify(e));
          } finally {
            host.drawGraph(data, props);
-           this._firstUpdate = false;
          }
        };
        if (this._firstUpdate) {
          LoadLibsAfterResize(this, this.$data, this._props);
+         this._firstUpdate = false;
        } else {
          this.drawGraph(this.$data, this._props);
        }
-      this.drawGraph(this.$data, this._props);
+     
     }
     connectedCallback() {
       console.log("connectedCallback");
@@ -131,11 +130,12 @@
           console.log(JSON.stringify(e));
         } finally {
           host.drawGraph(data, props);
-          this._firstUpdate = false;
+          
         }
       };
       if( this._firstUpdate){
         LoadLibs(this, this.$data, this._props);
+        this._firstUpdate = false;
       }
       
       this._init = false;

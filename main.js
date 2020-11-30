@@ -41,7 +41,16 @@
       this._selectionEvent = false;
     }
     onCustomWidgetBeforeUpdate(changedProperties) {
-      console.log("onCustomWidgetBeforeUpdate");
+      console.log("onCustomWidgetBeforeUpdate");      
+    }
+    onCustomWidgetAfterUpdate(changedProperties) {
+      console.log("onCustomWidgetAfterUpdate")
+      var shadow = this.shadowRoot;
+
+      if ("data" in changedProperties) {
+        this.$data = changedProperties["data"];
+        this._selectionEvent = false;
+      }
       let LoadLibsAfterUpdate = async function (host, data, props) {
         console.log("LoadLibsAfterUpdate")
         try {
@@ -56,39 +65,8 @@
         } catch (e) {
           console.log(JSON.stringify(e));
         } finally {
-          //host.drawGraph(data, props);
-          console.log("Load of libs done")
-        }
-      };
-      if( d3 != undefined)
-      {
-        await LoadLibsAfterUpdate(this, this.$data, this._props);
-      }
-      
-    }
-    onCustomWidgetAfterUpdate(changedProperties) {
-      console.log("onCustomWidgetAfterUpdate")
-      var shadow = this.shadowRoot;
-
-      if ("data" in changedProperties) {
-        this.$data = changedProperties["data"];
-        this._selectionEvent = false;
-      }
-      /*let LoadLibsAfterUpdate = async function (host, data, props) {
-        console.log("LoadLibsAfterUpdate")
-        try {
-          await host.loadScript("https://dagrejs.github.io/project/dagre-d3/latest/dagre-d3.min.js", shadow);
-          await host.loadScript("https://d3js.org/d3.v4.min.js", shadow);
-          await host.loadScript("https://d3js.org/d3-force.v1.min.js", shadow);
-          await host.loadScript("https://d3js.org/d3-scale.v1.min.js", shadow);
-          await host.loadScript(
-            "https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js",
-            shadow
-          );
-        } catch (e) {
-          console.log(JSON.stringify(e));
-        } finally {
           host.drawGraph(data, props);
+          this._firstUpdate = false;
       }
       };
       if (!(this._init || this._selectionEvent)) {
@@ -99,7 +77,7 @@
           this.drawGraph(this.$data, this._props);
         }
 
-      }*/
+      }
       this.drawGraph(this.$data, this._props);
     }
     onCustomWidgetResize(width, height) {
@@ -107,7 +85,7 @@
       var shadow = this.shadowRoot;
       this.$width = width + "px";
       this.$height = height + "px";
-      /* let LoadLibsAfterResize = async function (host, data, props) {
+       let LoadLibsAfterResize = async function (host, data, props) {
          try {
            console.log("LoadLibsAfterUpdate")
            await host.loadScript("https://dagrejs.github.io/project/dagre-d3/latest/dagre-d3.min.js", shadow);
@@ -122,14 +100,14 @@
            console.log(JSON.stringify(e));
          } finally {
            host.drawGraph(data, props);
+           this._firstUpdate = false;
          }
        };
-       if (this._firstResize) {
+       if (this._firstUpdate) {
          LoadLibsAfterResize(this, this.$data, this._props);
-         this._firstResize = false;
        } else {
          this.drawGraph(this.$data, this._props);
-       }*/
+       }
       this.drawGraph(this.$data, this._props);
     }
     connectedCallback() {
@@ -138,7 +116,7 @@
       var custelem = shadow.host;
       this.$width = custelem.parentNode.parentNode.parentNode.style.width;
       this.$height = custelem.parentNode.parentNode.parentNode.style.height;
-      /*let LoadLibs = async function (host, data, props) {
+      let LoadLibs = async function (host, data, props) {
         try {
           console.log("LoadLibsAfterUpdate")
           await host.loadScript("https://dagrejs.github.io/project/dagre-d3/latest/dagre-d3.min.js", shadow);
@@ -153,10 +131,13 @@
           console.log(JSON.stringify(e));
         } finally {
           host.drawGraph(data, props);
+          this._firstUpdate = false;
         }
       };
-      LoadLibs(this, this.$data, this._props);
-      */
+      if( this._firstUpdate){
+        LoadLibs(this, this.$data, this._props);
+      }
+      
       this._init = false;
     }
     disconnectedCallback() { console.log("disconnectedCallback") }

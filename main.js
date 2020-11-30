@@ -49,7 +49,7 @@
         this.$data = changedProperties["data"];
         this._selectionEvent = false;
       }
-      let LoadLibsAfterUpdate = async function (host, data, props) {
+      /*let LoadLibsAfterUpdate = async function (host, data, props) {
         console.log("LoadLibsAfterUpdate")
         try {
           await host.loadScript("https://dagrejs.github.io/project/dagre-d3/latest/dagre-d3.min.js", shadow);
@@ -73,14 +73,16 @@
         } else {
           this.drawGraph(this.$data, this._props);
         }
-      }
+
+      }*/
+      this.drawGraph(this.$data, this._props);
     }
     onCustomWidgetResize(width, height) {
       console.log("onCustomWidgetResize");
       var shadow = this.shadowRoot;
       this.$width = width + "px";
       this.$height = height + "px";
-      let LoadLibsAfterResize = async function (host, data, props) {
+     /* let LoadLibsAfterResize = async function (host, data, props) {
         try {
           console.log("LoadLibsAfterUpdate")
           await host.loadScript("https://dagrejs.github.io/project/dagre-d3/latest/dagre-d3.min.js", shadow);
@@ -102,7 +104,8 @@
         this._firstResize = false;
       } else {
         this.drawGraph(this.$data, this._props);
-      }
+      }*/
+      this.drawGraph(this.$data, this._props);
     }
     connectedCallback() {
       console.log("connectedCallback");

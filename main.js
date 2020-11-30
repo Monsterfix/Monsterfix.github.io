@@ -144,14 +144,14 @@
       var height = 1000 ;
       
       d3.select(r.querySelector("#dagreChart")).remove()
-      console.log("3")
+      //console.log("3")
 
       let dagreContainer = _div.appendChild(document.createElement("div"));
       dagreContainer.setAttribute("id", "dagreChart");
       dagreContainer.setAttribute("width", width);
       dagreContainer.setAttribute("height", height);
 
-      console.log("Try load of dagre charts")
+      //console.log("Try load of dagre charts")
       var g = new dagreD3.graphlib.Graph().setGraph({});
 
       // States and transitions from RFC 793
@@ -199,7 +199,7 @@
           });
       svg.call(zoom);
       var render = new dagreD3.render();
-      console.log("Dagre Rendered 14")
+      //console.log("Dagre Rendered 14")
       
       render(inner, g);
   
@@ -257,7 +257,7 @@
         let script = document.createElement("script");
         script.src = src;
         script.onload = () => {
-          console.log("Load: " + src);
+         // console.log("Load: " + src);
           resolve(script);
         };
         script.onerror = () =>

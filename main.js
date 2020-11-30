@@ -40,8 +40,9 @@
       this._firstResize = true;
       this._selectionEvent = false;
     }
-    onCustomWidgetBeforeUpdate(changedProperties) {}
+    onCustomWidgetBeforeUpdate(changedProperties) {console.log("onCustomWidgetBeforeUpdate")}
     onCustomWidgetAfterUpdate(changedProperties) {
+      console.log("onCustomWidgetAfterUpdate")
       var shadow = this.shadowRoot;
       
       if ("data" in changedProperties) {
@@ -49,6 +50,7 @@
         this._selectionEvent = false;
       }
       let LoadLibsAfterUpdate = async function (host, data, props) {
+        console.log("LoadLibsAfterUpdate")
         try {
           await host.loadScript("https://dagrejs.github.io/project/dagre-d3/latest/dagre-d3.min.js", shadow);
           await host.loadScript("https://d3js.org/d3.v4.min.js", shadow);
@@ -74,11 +76,13 @@
       }
     }
     onCustomWidgetResize(width, height) {
+      console.log("onCustomWidgetResize");
       var shadow = this.shadowRoot;
       this.$width = width + "px";
       this.$height = height + "px";
       let LoadLibsAfterResize = async function (host, data, props) {
         try {
+          console.log("LoadLibsAfterUpdate")
           await host.loadScript("https://dagrejs.github.io/project/dagre-d3/latest/dagre-d3.min.js", shadow);
           await host.loadScript("https://d3js.org/d3.v4.min.js", shadow);
           await host.loadScript("https://d3js.org/d3-force.v1.min.js", shadow);
@@ -101,12 +105,14 @@
       }
     }
     connectedCallback() {
+      console.log("connectedCallback");
       var shadow = this.shadowRoot;
       var custelem = shadow.host;
       this.$width = custelem.parentNode.parentNode.parentNode.style.width;
       this.$height = custelem.parentNode.parentNode.parentNode.style.height;
       let LoadLibs = async function (host, data, props) {
         try {
+          console.log("LoadLibsAfterUpdate")
           await host.loadScript("https://dagrejs.github.io/project/dagre-d3/latest/dagre-d3.min.js", shadow);
           await host.loadScript("https://d3js.org/d3.v4.min.js", shadow);
           await host.loadScript("https://d3js.org/d3-force.v1.min.js", shadow);
@@ -124,13 +130,14 @@
       LoadLibs(this, this.$data, this._props);
       this._init = false;
     }
-    disconnectedCallback() {}
+    disconnectedCallback() {console.log("disconnectedCallback")}
     updateSelectedLabel(label) {
+      console.log("updateSelectedLabel");
       if (label == "") this._props.selectedLabel = undefined;
       else this._props.selectedLabel = label;
     }
     drawGraph(value, config){
-     
+      console.log("drawGraph");
       var r = this.shadowRoot;
       var _div = r.querySelector("div");
       var width = _div.offsetWidth * 1
@@ -204,6 +211,7 @@
       //svg.attr('height', g.graph().height * initialScale + 40);
     }
     drawChart(value, config) {
+      console.log("drawChart");
       this.drawGraph(value,config);
       return;
       config.valDecimal = config.valDecimal + "";

@@ -49,6 +49,7 @@
         this.$data = changedProperties["data"];
         this._selectionEvent = false;
       }
+      console.log(this.$data)
       let LoadLibsAfterUpdate = async function (host, data, props) {
         console.log("LoadLibsAfterUpdate")
         try {
